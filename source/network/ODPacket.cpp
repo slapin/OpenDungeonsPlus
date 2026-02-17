@@ -15,6 +15,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <fstream>
 #include "network/ODPacket.h"
 
 #define OD_INT64TOINT32H(valInt64)              (static_cast<int32_t>(valInt64 >> 32))
