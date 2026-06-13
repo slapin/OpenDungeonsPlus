@@ -30,6 +30,8 @@
 #include <OISInputManager.h>
 #include <OgreRenderWindow.h>
 
+#include <clocale>
+
 InputManager::InputManager(Ogre::RenderWindow* renderWindow):
     mInputManager(nullptr),
     mKeyboard(nullptr),
@@ -89,7 +91,7 @@ InputManager::InputManager(Ogre::RenderWindow* renderWindow):
     paramList.insert(std::make_pair(std::string("w32_keyboard"), std::string(keyboardGrab ? "DISCL_EXCLUSIVE" : "DISCL_NONEXCLUSIVE")));
 #elif defined OIS_LINUX_PLATFORM
     paramList.insert(std::make_pair(std::string("x11_mouse_grab"), std::string(mouseGrab ? "true" : "false")));
-    paramList.insert(std::make_pair(std::string("x11_mouse_hide"), std::string("false")));
+    paramList.insert(std::make_pair(std::string("x11_mouse_hide"), std::string("true")));
     paramList.insert(std::make_pair(std::string("x11_keyboard_grab"), std::string(keyboardGrab ? "true" : "false")));
     paramList.insert(std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
 #endif
@@ -106,6 +108,11 @@ InputManager::InputManager(Ogre::RenderWindow* renderWindow):
 
     //setup Mouse
     mMouse = static_cast<OIS::Mouse*>(mInputManager->createInputObject(OIS::OISMouse, true));
+
+    // OIS (LinuxKeyboard) calls setlocale(LC_ALL, "") which switches the
+    // numeric locale back to the user's environment. CEGUI's property parser
+    // relies on the C numeric locale (dot decimal separator), so restore it.
+    std::setlocale(LC_NUMERIC, "C");
 #else
     mKeyboard.reset(new Keyboard());
 #endif

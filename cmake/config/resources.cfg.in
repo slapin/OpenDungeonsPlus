@@ -1,15 +1,9 @@
 [OgreInternal]
-FileSystem=/usr/share/OGRE/Media/RTShaderLib
-FileSystem=/usr/share/OGRE/Media/RTShaderLib/GLSL
-FileSystem=/usr/share/OGRE/Media/RTShaderLib/HLSL
-FileSystem=/usr/share/OGRE/Media/RTShaderLib/HLSL_Cg
+FileSystem=@OGRE_MEDIA_DIR@/Main
 
 [Graphics]
-FileSystem=/usr/share/OGRE/Media/RTShaderLib
-FileSystem=/usr/share/OGRE/Media/RTShaderLib/GLSL
-FileSystem=/usr/share/OGRE/Media/RTShaderLib/HLSL
-FileSystem=/usr/share/OGRE/Media/RTShaderLib/HLSL_Cg
-FileSystem=/usr/share/OGRE/Media/Main
+FileSystem=@RTSHADER_DIR@
+FileSystem=@OGRE_MEDIA_DIR@/Main
 FileSystem=materials/scripts
 FileSystem=materials/scripts/Creatures
 FileSystem=materials/textures
